@@ -1,3 +1,52 @@
-.red {
-    background-color: red;
+html {
+    font-size: larger;
+    font-weight: 600;
+
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    text-align: center;
+
+    --button-bg: #548ebb;
+}
+
+body {
+    background-color: #181d22;
+    --text-color: #d6d6d6;
+}
+
+button {
+    font-size: medium;
+    font-weight: 600;
+
+    background-color: var(--button-bg);
+
+    border: none;
+    border-radius: 0.5rem;
+
+    padding: 0.5rem;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5ea0d3;
+    transform: scale(1.1) translateY(-0.1rem);
+}
+
+button:active {
+    background-color: #88c4f3;
+    transform: scale(1.2) translateY(-0.2rem);
+}
+
+a {
+    color: #88c4f3;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--text-color);
 }

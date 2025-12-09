@@ -170,7 +170,7 @@ async def start():
     else:
         log.info("app started in offline mode")
 
-    scheduler.add_job(cache.cache_loop, "cron", minute="0,10")
+    scheduler.add_job(cache.cache_loop, "cron", minute="0,05")
     scheduler.start()
 
     log.info("scheduler started")

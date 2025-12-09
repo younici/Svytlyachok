@@ -168,21 +168,7 @@ main {
     transition: 0.2s;
 }
 
-.modal-overlay {
-    opacity: 0.5;
-    background-color: #000;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-
-    bottom: 0;
-    top: 0;
-    right: 0;
-    left: 0;
-
-}
-
-.modal-btn-container {
+.btn-container {
     position: fixed;
 
     text-align: center;
@@ -206,17 +192,19 @@ main {
     transform-origin: left center;
 }
 
-.modal-btn-container.finished {
+.btn-container.finished {
     animation: show-modal-div-finished 1s ease forwards;
 }
 
-.show-modal-btn {
+.show-btn,
+.scroll-top-btn {
     position: fixed;
 
     text-align: center;
     align-items: center;
+    justify-content: center;
+    display: flex;
 
-    right: 25px;
     bottom: 30px;
 
     width: 50px;
@@ -227,14 +215,23 @@ main {
 
     z-index: 9999;
 
-    border-radius: 0 0.5rem 0.5rem 0;
-
     background-color: var(--off-icon-bg);
 }
 
-.show-modal-btn.finished {
+.show-btn {
+    right: 25px;
+
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.show-btn.finished {
     border-radius: 0.5rem;
     height: 50px;
+}
+
+.scroll-top-btn {
+    left: 25px;
+    border-radius: 0.5rem;
 }
 
 /* .show-modal-btn-text.hide {
@@ -244,39 +241,40 @@ main {
 
 
 
-.modal-info-container {
+.info-container {
     display: flex;
-    position: fixed;
     flex-direction: column;
-
-    z-index: 9999;
 
     gap: 1rem;
 
     min-height: 85vh;
 
+    width: 80%;
+
+    padding: 2.5rem 1rem;
+
     top: 0;
-
-    max-width: 80vw;
-
-    padding: 1rem;
 
     margin-top: 2rem;
 
     border-radius: 0.5rem;
 
-    background-color: #8b5959;
+    background-color: var(--container-bg);
+    border: var(--border);
 }
 
-.close-modal {
-    height: 40px;
-    width: 40px;
+.info-head {
+    margin-bottom: 1.5rem;
 }
 
-.btn-close-container {
-    padding: 0.5rem 0.5rem 0 0;
+.info-body {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-footer {
+    margin-top: 1.5rem;
 }
 
 
@@ -333,6 +331,13 @@ input:checked + .slider::before {
     overflow: auto;
     opacity: 1;
     transform: translateY(1rem);
+}
+
+.card {
+    padding: 0.5rem;
+    background-color: var(--off-icon-bg);
+    border: var(--border);
+    border-radius: 0.5rem;
 }
 
 @keyframes show-modal-div-finished {

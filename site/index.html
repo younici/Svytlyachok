@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
   <head>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2059432028788704"
+      crossorigin="anonymous"
+    ></script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Svitlyachok</title>
+    <meta
+      name="description"
+      content="Likhtarychok показує графік відключень світла та надсилає сповіщення за годину до планового відключення у вашій черзі."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://likhtarychok.org/" />
+    <meta
+      property="og:title"
+      content="Likhtarychok — графік відключень та сповіщення"
+    />
+    <meta
+      property="og:description"
+      content="Швидко перевіряйте графік та отримуйте push-сповіщення про планові відключення у вашій черзі."
+    />
+    <meta property="og:url" content="https://likhtarychok.org/" />
+    <meta property="og:type" content="website" />
+    <title>Likhtarychok</title>
 
     <link rel="stylesheet" href="/site/css/reset.css" />
-    <link rel="stylesheet" href="/site/css/common.css?v=10" />
-    <link rel="stylesheet" href="/site/css/pages/index.css?v=17" />
-    <script src="/site/scr/main.js?v=17" defer></script>
+    <link rel="stylesheet" href="/site/css/common.css?v=12" />
+    <link rel="stylesheet" href="/site/css/pages/index.css?v=19" />
+    <script src="/site/scr/main.js?v=19" defer></script>
   </head>
   <body>
     <header></header>
@@ -83,27 +105,51 @@
         </div>
       </div>
 
-      <div class="modal-btn-container">
-        <p class="show-modal-btn-text">Інформація про сайт</p>
+      <div class="btn-container">
+        <p class="show-btn-text">Інформація про сайт</p>
       </div>
-      <button class="show-modal-btn" id="showModal">i</button>
+      <button class="scroll-top-btn" id="scrollTopBtn">^</button>
+      <button class="show-btn" id="showInfo">i</button>
 
-      <div class="modal-overlay hide"></div>
-
-      <div class="modal-info-container hide">
-        <div class="btn-close-container">
-          <button class="close-modal" id="closeModal">X</button>
+      <div class="info-container">
+        <div class="info-head">
+          <h2 class="info-title card">Про сайт</h2>
         </div>
-        <div class="modal-head">
-          <h2 class="modal-title">Про сайт</h2>
+        <div class="info-body">
+          <div class="card">
+            <h1>
+              Likhtarychok (Ліхтаричок) сайт створений для зручного показу
+              графіку відключень світла по Житомирьскій області
+            </h1>
+          </div>
+          <div class="card">
+            Як дізнатися свою чергу? зайдіть на сайт
+            <a href="https://www.ztoe.com.ua/unhooking-search.php"
+              >Житомир обл. Енерго</a
+            >
+            та знайдіть свою чергу
+          </div>
+          <div class="card">
+            <p>
+              Графік береться з
+              <a href="https://www.ztoe.com.ua/unhooking-search.php"
+                >офіційного сайту Житомир обл. Енерго</a
+              >
+            </p>
+          </div>
+          <div class="card">
+            Графік може бути не точним, так як самі працівникі Житомир обл.
+            Енерго не завджи знають коли потрібно відключити світло а коли ні
+          </div>
         </div>
-        <div class="modal-body">
-          <h1>
-            Цей сайт створений для зручного показу графіку відключень світла по
-            Житомирьскій області
-          </h1>
+        <div class="info-footer">
+          <div class="card">
+            <p>
+              Created by <a href="https://t.me/younici">younici</a>
+              <br />kostantinreksa@gmail.com
+            </p>
+          </div>
         </div>
-        <div class="modal-footer"></div>
       </div>
     </main>
 

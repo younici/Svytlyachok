@@ -1,32 +1,49 @@
-from requests import request
 from bs4 import BeautifulSoup
 
-SITE_URL = "https://www.ztoe.com.ua/unhooking-search.php"
+import untils.cache as cache
 
-headers = {
-    "User-Agent": "Mozilla/5.0"
-}
+import untils.tools as tools
 
-def parse(queue: int, legacy = True):
-    if legacy:
-        queue = max(0, min(queue, 1))
+import os
+
+CAN_CACHE = os.getenv("CAN_CACHE") == "true"
+
+import logging
+
+log = logging.getLogger(__name__)
+
+log.info(f"cache status: {CAN_CACHE}")
+
+async def parse(queue: int):
+    queue = tools.queue_to_index(queue)
+    bias = tools.bias_from_index(queue)
+
+    text = ""
+
+    if CAN_CACHE:
+        text = await cache.get_cache(queue)
+        log.info("cache used")
     else:
-        queue = to_index(queue)
+        text = await tools.get_status(queue, bias)
 
-    html = request(url=SITE_URL, method="GET", timeout=15, headers=headers).text
-    soup = BeautifulSoup(html, "html.parser")
-    if legacy:
-        text = soup.find_all("table")[3].select("tr")[6+queue].select("td")[2:]
-    else:
-        text = soup.find_all("table")[3].select("tr")[2+queue].select("td")[2:]
+    if text is None:
+        return None
 
     status = []
     colors = []
 
-    for i in text:
-        t = str(i)
-        color = t.split(";")[5].split(">", maxsplit=1)[0].replace('"', "").split(sep=":", maxsplit=1)[1]
-        color = color.split()[0]
+    html = BeautifulSoup(text, "html.parser")
+
+    for i in html:
+        style = i.get("style", "")
+        color = None
+
+        for part in style.split(";"):
+            part = part.strip()
+            if part.startswith("background"):
+                color = part.split(":", 1)[1].strip()
+                break
+
         colors.append(color)
 
     for c in colors:
@@ -34,10 +51,4 @@ def parse(queue: int, legacy = True):
             status.append(0)
         else:
             status.append(1)
-
     return status
-
-def to_index(n: int) -> int:
-    x = n // 10
-    y = n % 10
-    return (x - 1) * 2 + y

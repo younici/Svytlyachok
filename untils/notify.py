@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 PASS = os.getenv("NOTIFY_PASS")
 # URL твоего сервера FastAPI
-SERVER_URL = "http://127.0.0.1:8000"
+SERVER_URL = "https://likhtarychok.org/"
 
 
 def send_notification(message: str, title: str):
@@ -39,8 +39,8 @@ async def start():
             print("⚠️ Сообщение не может быть пустым.")
         
 
-        await asyncio.sleep(3)
-        os.system("cls")
+        # await asyncio.sleep(3)
+        # os.system("cls")
 
 
 if __name__ == "__main__":

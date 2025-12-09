@@ -5,6 +5,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+import logging
+
+log = logging.getLogger(__name__)
+
+
 _redis_client: redis.Redis | None = None
 
 async def init_redis() -> redis.Redis | None:
@@ -15,12 +20,12 @@ async def init_redis() -> redis.Redis | None:
     if not redis_url:
         return None
 
-    _redis_client = redis.from_url(redis_url, decode_responses=True)
+    _redis_client = redis.from_url(redis_url)
 
     try:
         await _redis_client.ping()
     except Exception as e:
-        print(e)
+        log.error(e)
         _redis_client = None
     
     return _redis_client
@@ -33,5 +38,6 @@ async def load_subscriptions():
         return
 
     subs = await _redis_client.lrange("subscriptions", 0, -1)
-    print(f"🔹 Найдено подписок: {len(subs)}")
+    subs = [item.decode() if isinstance(item, (bytes, bytearray)) else item for item in subs]
+    log.info(f"Redis subscriptions loaded: {len(subs)}")
     return subs
