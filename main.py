@@ -53,9 +53,13 @@ OFFLINE = os.getenv("OFFLINE", "false").lower() == "true"
 
 app.mount("/site", StaticFiles(directory=SITE_DIR), name="site")
 
-@app.get("/favicon.ico", include_in_schema=False)
+@app.get("/favicon.ico", include_in_schema=True)
 async def favicon():
     return FileResponse(SITE_DIR / "favicon.ico")
+
+@app.get("/apple-touch-icon.png", include_in_schema=True)
+async def favicon():
+    return FileResponse(SITE_DIR / "apple-touch-icon.png")
 
 @app.get("/vapid_public_key")
 def vapid_key():
