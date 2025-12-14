@@ -1,0 +1,319 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 4rem;
+  margin-bottom: 5rem;
+}
+
+.container {
+  width: 80%;
+  max-width: 960px;
+  padding: 2.5rem 1rem;
+  background-color: var(--container-bg);
+  border-radius: 1rem;
+  border: var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  color: var(--text-color);
+}
+
+.mainElements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.buttonsDiv {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.queueSelector {
+  width: 7rem;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  padding: 0.1rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.refreshQueue {
+  color: var(--text-color);
+}
+
+.toggleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 10rem;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background-color: var(--slider-bg);
+  transition: 0.3s;
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--slider-main);
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.switch input:checked + .slider {
+  background-color: var(--slider-active);
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(8.2rem);
+}
+
+.rowContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  overflow: hidden;
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 100rem;
+  transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
+}
+
+.statusContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.statusElement {
+  display: flex;
+  flex-direction: row;
+  width: min-content;
+}
+
+.status {
+  padding: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+  border: var(--border);
+}
+
+.timeContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.rowElement {
+  height: 1rem;
+  padding: 0.5rem;
+  border: var(--border);
+}
+
+.off {
+  background-color: var(--off-icon-bg);
+}
+
+.disp {
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-0.5rem);
+  padding: 0;
+  margin: 0;
+}
+
+.outageSummary {
+  width: 100%;
+  transform: translateY(-2.5rem);
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+}
+
+.outageTitle {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.outageList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.outageChip {
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.75rem;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+    width: calc(30vw - 10%);
+}
+
+.outageEmpty {
+  color: #cfd8df;
+  opacity: 0.8;
+}
+
+.btnContainer {
+  position: fixed;
+  text-align: center;
+  align-items: center;
+  right: 30px;
+  bottom: 30px;
+  height: 50px;
+  padding-left: 1rem;
+  padding-right: 3rem;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--off-icon-bg);
+  border-radius: 0.5rem;
+  transition: none;
+  transform-origin: left center;
+  color: var(--text-color);
+  text-decoration: none;
+  z-index: 101;
+}
+
+.btnFinished {
+  animation: showModalDivFinished 1s ease forwards;
+}
+
+.showBtn {
+  position: fixed;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+  font-size: larger;
+  font-weight: 700;
+  z-index: 102;
+  background-color: var(--off-icon-bg);
+  color: var(--text-color);
+  right: 25px;
+  border-radius: 0 0.5rem 0.5rem 0;
+  text-decoration: none;
+}
+
+.showBtnFinished {
+  border-radius: 0.5rem;
+}
+
+.infoText {
+  font-weight: 600;
+}
+
+.modal {
+  position: fixed;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  width: 60%;
+  max-width: 640px;
+  min-width: 280px;
+  height: auto;
+  top: 30vh;
+  padding: 1.5rem;
+  border: var(--border);
+  border-radius: 0.5rem;
+  background: var(--container-bg);
+  color: var(--text-color);
+}
+
+.closeModal {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.modalButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.selectorBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: none;
+  text-decoration: none;
+  min-width: 11rem;
+  font-weight: 600;
+}
+
+.selectorBtn:hover {
+  background-color: #5ea0d3;
+}
+
+.modalOverlay {
+  position: fixed;
+  z-index: 9990;
+  background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200vh;
+  width: 100%;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+@keyframes showModalDivFinished {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scaleX(1);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(88%) scaleX(0.001);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(88%) scaleX(0);
+  }
+}
