@@ -18,34 +18,14 @@ async def init_db():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
         await conn.run_sync(_ensure_subscription_columns)
-        await conn.run_sync(_ensure_tg_columns)
 
 
 def _ensure_subscription_columns(sync_conn):
     inspector = inspect(sync_conn)
-    columns_info = {col["name"]: col for col in inspector.get_columns("subscriptions")}
-    columns = set(columns_info.keys())
+    columns = {col["name"] for col in inspector.get_columns("subscriptions")}
 
     if "queue_id" not in columns:
         sync_conn.execute(text("ALTER TABLE subscriptions ADD COLUMN IF NOT EXISTS queue_id INTEGER DEFAULT 0"))
-
-    # Make legacy user_id column nullable so inserts without it don't fail
-    user_col = columns_info.get("user_id")
-    if user_col and not user_col.get("nullable", True):
-        sync_conn.execute(text("ALTER TABLE subscriptions ALTER COLUMN user_id DROP NOT NULL"))
-
-
-def _ensure_tg_columns(sync_conn):
-    inspector = inspect(sync_conn)
-    if "tg_sub" not in inspector.get_table_names():
-        return
-
-    columns = {col["name"]: col for col in inspector.get_columns("tg_sub")}
-    tg_col = columns.get("tg_id")
-    if tg_col:
-        col_type = str(tg_col.get("type", "")).lower()
-        if "int4" in col_type or col_type == "integer" or col_type == "int":
-            sync_conn.execute(text("ALTER TABLE tg_sub ALTER COLUMN tg_id TYPE BIGINT"))
 
 
 def _extract_subscription_data(data: dict):
@@ -109,7 +89,7 @@ async def save_sub(data):
 
 async def get_all_http_sub():
     if AsyncSessionLocal is None:
-        log.warning("get_all_sub(): DB not available, returning empty list.")
+        log.warning("get_all_http_sub(): DB not available, returning empty list.")
         return []
 
     async with AsyncSessionLocal() as conn:

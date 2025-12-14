@@ -253,7 +253,7 @@ async def load_subscriptions_from_storage(force_db: bool = False):
 
     if _redis_client and not force_db:
         try:
-            subs_data = await redis_un.load_subscriptions()
+            subs_data = await redis_un.load_push_subscriptions_raw()
         except Exception as exc:
             log.warning("Failed to load subscriptions from Redis, disabling cache: %s", exc)
             _redis_client = None
@@ -270,7 +270,7 @@ async def load_subscriptions_from_storage(force_db: bool = False):
         return
 
     log.info("Subscriptions not found in Redis, falling back to DB.")
-    db_subs = await db.get_all_sub()
+    db_subs = await db.get_all_http_sub()
     loaded = 0
     for item in db_subs or []:
         normalized = normalize_subscription(item)

@@ -3,6 +3,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import os
+import sys
 
 from typing import Any
 
@@ -11,8 +12,13 @@ from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Load .env before importing modules that rely on it (db/redis configs)
 load_dotenv()
+
+# Ensure the app directory is at the front of sys.path so local modules (e.g. bot/)
+# are used even inside Docker where a third-party 'bot' module might exist.
+ROOT_DIR = Path(__file__).resolve().parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 import bot.bot as bot
 import untils.redis_db as redis_un
@@ -44,33 +50,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+BASE_PATH = "/api"
 ISDB = True
 
+NOTIFY_PASS = os.getenv("NOTIFY_PASS")
+
 BOT_ONLINE = os.getenv("BOT_ONLINE") == "true"
+OFFLINE = os.getenv("OFFLINE", "false").lower() == "true"
 
 VAPID_PUBLIC_KEY = os.getenv("VAPID_PUBLIC_KEY")
 VAPID_PRIVATE_KEY = os.getenv("VAPID_PRIVATE_KEY")
-NOTIFY_PASS = os.getenv("NOTIFY_PASS")
-BASE_DIR = Path(__file__).resolve().parent
-SITE_DIR = BASE_DIR / "site"
 
-OFFLINE = os.getenv("OFFLINE", "false").lower() == "true"
-
-app.mount("/site", StaticFiles(directory=SITE_DIR), name="site")
-
-@app.get("/favicon.ico", include_in_schema=True)
-async def favicon():
-    return FileResponse(SITE_DIR / "favicon.ico")
-
-@app.get("/apple-touch-icon.png", include_in_schema=True)
-async def favicon():
-    return FileResponse(SITE_DIR / "apple-touch-icon.png")
-
-@app.get("/vapid_public_key")
+@app.get(f"{BASE_PATH}/vapid_public_key")
 def vapid_key():
     return {"key": VAPID_PUBLIC_KEY}
 
-@app.post("/subscribe")
+@app.post(f"{BASE_PATH}/subscribe")
 async def subscribe(req: Request):
     data = await req.json()
 
@@ -110,7 +105,7 @@ async def subscribe(req: Request):
 
     return {"ok": True, "msg": "Ви пiдписались на сповiщення" if created else "Данi пiдписки оновлено"}
 
-@app.post("/unsubscribe")
+@app.post(f"{BASE_PATH}/unsubscribe")
 async def unsubscribe(req: Request):
     data = await req.json()
     sub = data.get("subscription")
@@ -129,12 +124,10 @@ async def unsubscribe(req: Request):
             log.warning(f"delete_sub failed: {ex}")
 
     await subcription.save_all_to_redis()
-
-    # Отменяем подписку в базе/кэше, даже если на клиенте уже нет подписи
     return {"ok": True, "msg": "Підписку скасовано" if removed else "Підписка не знайдена"}
 
 
-@app.post("/notify")
+@app.post(f"{BASE_PATH}/notify")
 async def notify(req: Request):
     body: dict[str, Any] = await req.json()
     message = body.get("message")
@@ -145,29 +138,7 @@ async def notify(req: Request):
 
     return await notifier.notify_all(title=title, message=message)
 
-@app.get("/")
-def index():
-    response = FileResponse(SITE_DIR / "index.html")
-    response.headers["Cache-Control"] = "public, max-age=86400"
-    return response
-
-@app.get("/robots.txt")
-def robots():
-    return FileResponse(SITE_DIR / "robots.txt")
-
-@app.get("/sitemap.xml")
-def sitemap():
-    return FileResponse(SITE_DIR / "sitemap.xml")
-
-@app.get("/ads.txt")
-def ads():
-    return FileResponse(SITE_DIR / "ads.txt")
-
-@app.get("/sw.js")
-def service_worker():
-    return FileResponse(SITE_DIR / "sw.js")
-
-@app.get("/status")
+@app.get(f"{BASE_PATH}/status")
 async def get_status(queue: str | None = None):
     queue_code = subcription.queue_code_from_input(queue)
     return {"Status": await notifier.parse_status_for_queue(queue_code)}

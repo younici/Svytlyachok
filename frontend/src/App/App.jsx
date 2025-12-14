@@ -351,7 +351,10 @@ function App() {
           </label>
         </div>
 
-        <div className={`${styles.rowContainer} ${useOutageView ? styles.disp : ""}`}>
+        <div
+          className={`${styles.rowContainer} ${useOutageView ? styles.disp : ""} ${isLoading ? styles.disp : ""}`}
+          style={isLoading ? { display: "none" } : undefined}
+        >
           <div className={styles.statusContainer}>
             {statusRows.map(([left, right], idx) => (
               <div key={`status-${idx}`} className={styles.statusElement}>
@@ -370,7 +373,10 @@ function App() {
           </div>
         </div>
 
-        <div className={`${styles.outageSummary} ${useOutageView ? "" : styles.disp}`}>
+        <div
+          className={`${styles.outageSummary} ${useOutageView ? "" : styles.disp} ${isLoading ? styles.disp : ""}`}
+          style={isLoading ? { display: "none" } : undefined}
+        >
           <p className={styles.outageTitle}>Години без світла</p>
           <div id="outageList" className={styles.outageList}>
             {outageContent}

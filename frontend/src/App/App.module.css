@@ -177,7 +177,8 @@
   border-radius: 0.75rem;
   background-color: var(--button-bg);
   color: var(--text-color);
-    width: calc(30vw - 10%);
+  width: calc(50vw - 20%);
+  max-width: 9rem;
 }
 
 .outageEmpty {
