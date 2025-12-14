@@ -26,7 +26,7 @@ import asyncio
 import logging as log
 
 log.basicConfig(
-    level=log.info,
+    level=log.INFO,
     format="! [%(levelname)s] %(message)s"
 )
 
