@@ -1,17 +1,21 @@
+import { Link } from "react-router-dom";
 import styles from "./Info.module.css";
 
 function Info() {
   return (
-    <main className={styles.page}>
+    <>
       <div className={styles.infoContainer}>
         <div className={styles.infoHead}>
           <h2 className={`${styles.infoTitle} ${styles.card}`}>Про сайт</h2>
+          <Link className={`${styles.card} ${styles.cta}`} to="/graph">
+            Перейти до графіку
+          </Link>
         </div>
         <div className={styles.infoBody}>
           <div className={styles.card}>
             <h1>
-              <a href="/">Likhtarychok</a> (Ліхтаричок) сайт створений для зручного показу
-              графіку відключень світла по Житомирьскій області 
+              <Link to="/graph">Likhtarychok</Link> (Ліхтаричок) сайт створений для зручного показу
+              графіку відключень світла по Житомирьскій області
             </h1>
           </div>
           <div className={styles.card}>
@@ -34,17 +38,8 @@ function Info() {
             не завджи знають коли потрібно відключити світло а коли ні
           </div>
         </div>
-        <div className={styles.infoFooter}>
-          <div className={styles.card}>
-            <p>
-              Created by <a href="https://t.me/younici">younici</a>
-              <br />
-              kostantinreksa@gmail.com
-            </p>
-          </div>
-        </div>
       </div>
-    </main>
+    </>
   );
 }
 

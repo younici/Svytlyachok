@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 router = Router()
 
 QUEUE_MESSAGE = """
-Сайт з графіками відключення світла: https://likhtarychok.org
+Посилання сайт з графіками відключення світла: https://likhtarychok.org/graph
 """
 
 @router.message(Command("queue"))

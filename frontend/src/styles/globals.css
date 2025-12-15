@@ -1,3 +1,14 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 4rem;
+  margin-bottom: 5rem;
+  
+  min-height: 100vh;
+}
+
 html {
   font-size: larger;
   font-weight: 600;
@@ -24,17 +35,17 @@ button {
 }
 
 button:hover {
-  background-color: var(--button-hover);
+  background-color: #5ea0d3;
   transform: scale(1.1) translateY(-0.1rem);
 }
 
 button:active {
-  background-color: var(--button-active);
+  background-color: #88c4f3;
   transform: scale(1.2) translateY(-0.2rem);
 }
 
 a {
-  color: var(--link-color);
+  color: #88c4f3;
   cursor: pointer;
   text-decoration: none;
 }
@@ -45,4 +56,19 @@ a:hover {
 
 * {
   transition: 0.2s;
+}
+
+footer {
+  background-color: var(--container-bg);
+  width: 80%;
+  align-self: center;
+  justify-self: center;
+  
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  border-radius: 0.5rem;
+  border: var(--border);
+
+  text-align: center;
 }

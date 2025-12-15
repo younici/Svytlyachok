@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "./App.module.css";
+import styles from "./Graph.module.css";
 
 const queueOptions = ["11", "12", "21", "22", "31", "32", "41", "42", "51", "52", "61", "62"];
 const defaultStatuses = Array(48).fill(false);
@@ -121,7 +121,7 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
-function App() {
+function Graph() {
   const [queue, setQueue] = useState(() => loadQueueFromStorage());
   const [useOutageView, setUseOutageView] = useState(() => loadToggleFromStorage());
   const [statuses, setStatuses] = useState(defaultStatuses);
@@ -302,7 +302,7 @@ function App() {
   }, [hasData, outageRanges]);
 
   return (
-    <main className={styles.page}>
+    <>
       <div className={styles.container}>
         <div className={styles.mainElements}>
           <p>
@@ -385,10 +385,10 @@ function App() {
         </div>
       </div>
 
-      <Link className={`${styles.btnContainer} ${btnFinished ? styles.btnFinished : ""}`} to="/info">
+      <Link className={`${styles.btnContainer} ${btnFinished ? styles.btnFinished : ""}`} to="/">
         <span className={styles.infoText}>Інформація про сайт</span>
       </Link>
-      <Link className={`${styles.showBtn} ${showBtnFinished ? styles.showBtnFinished : ""}`} to="/info" aria-label="Перейти до сторінки з інформацією про сайт">
+      <Link className={`${styles.showBtn} ${showBtnFinished ? styles.showBtnFinished : ""}`} to="/" aria-label="Перейти до сторінки з інформацією про сайт">
         i
       </Link>
 
@@ -411,8 +411,8 @@ function App() {
           <div className={styles.modalOverlay} onClick={() => setIsModalOpen(false)}></div>
         </>
       )}
-    </main>
+      </>
   );
 }
 
-export default App;
+export default Graph;
