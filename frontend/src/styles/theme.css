@@ -1,0 +1,14 @@
+:root {
+  --bg-body: #181d22;
+  --text-color: #d6d6d6;
+
+  --accent: #64a8db;
+  --button-bg: #548ebb;
+  --container-bg: #3f698a;
+  --slider-bg: #548ebb;
+  --slider-main: #b4d8f3;
+  --slider-active: #62a3d4;
+  --off-icon-bg: #5188b3;
+  --queue-selector-bg: #64a8db;
+  --border: solid var(--accent) 2px;
+}
