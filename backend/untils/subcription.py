@@ -6,7 +6,7 @@ from typing import Dict, List, Tuple, Optional, Any
 import untils.redis_db as redis_un
 import db.orm.utils as db
 from db.orm.session import AsyncSessionLocal
-from db.orm.models.subscription import Subscription
+from db.orm.models import Subscription
 from sqlalchemy import select
 
 from untils.variebles import QUEUE_LABELS

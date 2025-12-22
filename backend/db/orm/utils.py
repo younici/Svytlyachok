@@ -2,8 +2,7 @@ from db.orm.base import Base
 from db.orm.session import engine, AsyncSessionLocal, db_available
 from sqlalchemy import select, text, inspect
 
-from db.orm.models.subscription import Subscription
-from db.orm.models.tg_sub import TgSub
+from db.orm.models import Subscription, TgSub
 
 import logging
 
