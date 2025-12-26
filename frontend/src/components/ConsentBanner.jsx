@@ -27,7 +27,7 @@ function ConsentBanner() {
           Відхилити
         </button>
         <button type="button" className={styles.primary} onClick={accept}>
-          Прийняти рекламу
+          Прийняти Cookie
         </button>
       </div>
     </div>

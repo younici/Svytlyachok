@@ -52,6 +52,7 @@
 
 .primary {
   background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  color: var(--text-contrast);
 }
 
 .secondary {

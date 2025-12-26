@@ -129,7 +129,7 @@
 .cta:hover {
   transform: translateY(-1px);
   box-shadow: 0 12px 32px rgba(255, 202, 107, 0.3);
-  color: var(--text-contrast);
+  color: var(--text-primary);
 }
 
 .ctaGhost {
