@@ -1,0 +1,66 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.5rem;
+  border: var(--stroke);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(12, 27, 46, 0.92), rgba(12, 27, 46, 0.7));
+  box-shadow: var(--shadow-soft);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.lead {
+  color: var(--text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  padding: 1.1rem;
+  border-radius: 14px;
+  border: var(--stroke);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: var(--shadow-lift);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.card ul {
+  margin: 0;
+  padding-left: 1rem;
+  color: var(--text-muted);
+  display: grid;
+  gap: 0.35rem;
+}
+
+.note {
+  padding: 1.2rem;
+  border-radius: 16px;
+  border: var(--stroke);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-soft);
+}
+
+.note a {
+  color: var(--accent);
+  font-weight: 700;
+}

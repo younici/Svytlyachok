@@ -1,4 +1,5 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
+import ConsentBanner from "./ConsentBanner.jsx";
 import styles from "./Layout.module.css";
 
 const navLinks = [
@@ -74,6 +75,7 @@ function Layout() {
             <a href="https://t.me/younici" target="_blank" rel="noreferrer">
               Зворотний зв'язок
             </a>
+            <NavLink to="/privacy">Політика приватності</NavLink>
           </div>
         </div>
         <div className={styles.footerMeta}>
@@ -81,6 +83,8 @@ function Layout() {
           <span>Графік оновлюється кожні 5 хвилин</span>
         </div>
       </footer>
+
+      <ConsentBanner />
     </div>
   );
 }

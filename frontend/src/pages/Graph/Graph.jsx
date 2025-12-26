@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import AdSlot from "../../components/AdSlot.jsx";
+import { useAdsConsent } from "../../context/AdsConsentContext.jsx";
 import styles from "./Graph.module.css";
+
+const graphAdSlot = import.meta.env.VITE_ADSENSE_SLOT_GRAPH;
 
 const queueOptions = ["11", "12", "21", "22", "31", "32", "41", "42", "51", "52", "61", "62"];
 const defaultStatuses = Array(48).fill(false);
@@ -260,6 +264,8 @@ function Graph() {
   const [publicKey, setPublicKey] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { consent } = useAdsConsent();
+  const adsEnabled = consent === "granted";
 
   const queueLabel = `${queue[0]}.${queue[1]}`;
 
@@ -511,6 +517,8 @@ function Graph() {
           </p>
         </div>
       </section>
+
+      <AdSlot slot={graphAdSlot} enabled={adsEnabled} />
 
       <section className={styles.grid}>
         <div className={`${styles.card} ${useOutageView ? styles.collapsed : ""} ${isLoading ? styles.faded : ""}`}>
