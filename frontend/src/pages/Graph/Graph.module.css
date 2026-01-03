@@ -161,6 +161,26 @@
   gap: 1rem;
 }
 
+.widgetCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 13rem;
+}
+
+.widgetBtn {
+  margin-top: 1rem;
+  width: 100%;
+  color: var(--text-contrast);
+}
+
+.widgetHero {
+  font-size: large;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.widgetCard,
 .actionCard,
 .noteCard {
   border: var(--stroke);
@@ -202,6 +222,7 @@
   grid-template-columns: 2fr 1.15fr;
   gap: 1rem;
 }
+
 
 .card,
 .outageCard {
@@ -310,6 +331,8 @@
 
 .collapsed {
   display: none;
+  width: 0;
+  height: 0;
 }
 
 .faded {
@@ -336,13 +359,21 @@
 }
 
 .closeModal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
   position: absolute;
   right: 0.8rem;
   top: 0.8rem;
+
   width: 2.5rem;
   height: 2.5rem;
+
   background: rgba(255, 255, 255, 0.08);
   color: var(--text-primary);
+
   border-radius: 10px;
 }
 
@@ -359,7 +390,7 @@
   padding: 0.85rem 1rem;
   border-radius: 12px;
   background: linear-gradient(135deg, var(--accent-secondary), var(--accent));
-  color: var(--text-primary);
+  color: var(--text-contrast-secondary);
   border: none;
   text-decoration: none;
   min-width: 11rem;
@@ -393,6 +424,7 @@
 }
 
 @media (max-width: 640px) {
+  .widgetCard,
   .hero,
   .actionCard,
   .noteCard,

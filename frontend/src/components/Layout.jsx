@@ -51,6 +51,9 @@ function Layout() {
         <Outlet />
       </main>
 
+      <script async="async" data-cfasync="false" src="https://pl28354173.effectivegatecpm.com/f756b89b922a64931ef1bbcf889211f7/invoke.js"></script>
+      <div id="container-f756b89b922a64931ef1bbcf889211f7"></div>
+
       <footer className={styles.footer}>
         <div>
           <div className={styles.logoMarkSmall} aria-hidden />

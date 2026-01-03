@@ -2,11 +2,12 @@
   --bg-body: #050914;
   --bg-surface: #0c1b2e;
   --bg-panel: rgba(255, 255, 255, 0.03);
-  --bg-card: #0f253b;
+  --bg-card: #1d1d1d;
 
   --text-primary: #e9f1ff;
   --text-muted: #9db3ce;
-  --text-contrast: #0c1827;
+  --text-contrast: #292014;
+  --text-contrast-secondary: #082922;
 
   --accent: #ffca6b;
   --accent-strong: #ff9d42;

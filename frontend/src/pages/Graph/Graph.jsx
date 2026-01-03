@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import AdSlot from "../../components/AdSlot.jsx";
@@ -378,7 +379,7 @@ function Graph() {
 
   async function unsubscribe() {
     try {
-      const reg = await navigator.serviceWorker.register(`${apiBase}/sw.js`);
+      const reg = await navigator.serviceWorker.register(`/sw.js`);
       const sw = await navigator.serviceWorker.ready;
       const currentSub = await sw.pushManager.getSubscription();
 
@@ -556,6 +557,12 @@ function Graph() {
           <Link className={styles.faqLink} to="/faq">
             Перейти до FAQ
           </Link>
+        </div>
+
+        <div className={`${styles.widgetCard}`}>
+          <p className={`${styles.widgetHero}`}>Віджет</p>
+          <p>Доадайте компактний віджет на головний екран для швидкого перегляду графіку</p>
+          <button className={`${styles.widgetBtn}`} onClick={() => {window.location.href = "/widget";}}>Відкрити віджет</button>
         </div>
       </section>
 
