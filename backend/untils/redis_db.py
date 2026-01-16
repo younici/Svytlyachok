@@ -124,3 +124,30 @@ async def delete_tg_subscription(tg_id: int) -> bool:
         return False
     await _redis_client.hdel("tg_subscriptions", tg_id)
     return True
+
+async def delete_push_subscription(endpoint: str) -> bool:
+    """Remove a web push subscription from Redis list by its endpoint."""
+    if not _redis_client:
+        return False
+
+    raw_subs = await load_push_subscriptions_raw()
+    updated_subs = []
+    found = False
+
+    for s in raw_subs:
+        try:
+            if json.loads(s).get("endpoint") == endpoint:
+                found = True
+                continue
+            updated_subs.append(s)
+        except (json.JSONDecodeError, AttributeError):
+            updated_subs.append(s)
+
+    if found:
+        await _redis_client.delete("subscriptions")
+        if updated_subs:
+            await _redis_client.rpush("subscriptions", *updated_subs)
+        log.info("Deleted push subscription: %s", endpoint)
+        return True
+
+    return False

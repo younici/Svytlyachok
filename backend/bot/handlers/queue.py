@@ -3,6 +3,7 @@ from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
 import logging
 
+import untils.db_multi as dbM
 import db.orm.utils as db
 import untils.redis_db as redisdb
 from untils import subcription, tools, variebles
@@ -29,8 +30,7 @@ async def bot_set_queue(msg: Message):
 @router.message(Command("delete_queue"))
 async def bot_delete_queue(msg: Message):
     id = msg.from_user.id
-    status = await db.delete_tg_subscriber(id)
-    await redisdb.delete_tg_subscription(id)
+    _, _, status = await dbM.delete_tg_sub(id)
     log.info(f"status: {status}")
     match status:
         case -1:

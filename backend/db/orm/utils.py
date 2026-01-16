@@ -158,7 +158,7 @@ async def is_support_admin(tg_id: int) -> bool:
 async def remove_support_admin(tg_id: int) -> bool:
     if AsyncSessionLocal is None or not tg_id:
         return False
-    if tg_id == PRIMARY_SUPPORT_ADMIN and PRIMARY_SUPPORT_ADMIN:
+    if tg_id == PRIMARY_SUPPORT_ADMIN:
         # базового адміна не видаляємо
         return False
 

@@ -5,6 +5,7 @@ from datetime import datetime
 
 from pywebpush import webpush, WebPushException
 
+import untils.db_multi as dbM
 from untils.parser import parse
 from untils import subcription
 
@@ -88,11 +89,11 @@ async def _send_telegram_notifications(text: str, queue: int | None = None):
         if tg_id is None:
             continue
         try:
-            result = await send_notify(int(tg_id), text)
-            if result == 1:
-                sent += 1
+            await send_notify(int(tg_id), text)
+            sent += 1
         except Exception as exc:
             log.warning("Telegram notify failed for %s: %s", tg_id, exc)
+            await dbM.delete_tg_sub(tg_id)
             errors.append(f"{tg_id}: {exc}")
 
     return sent, errors
@@ -123,7 +124,7 @@ async def notify_all(title: str, message: str):
             log.warning("Push failed for %s...: %s (status=%s)", endpoint[:80], ex, status_code)
 
             if status_code in (404, 410):
-                await subcription.remove_push_subscription(endpoint)
+                await dbM.delete_web_sub(endpoint)
                 continue
 
             errors.append(f"{endpoint[:80]}...: {ex}")

@@ -19,7 +19,6 @@ telegram_subscriptions: Dict[int, List[dict]] = {}
 
 _redis_client = None
 
-
 def set_redis_client(client):
     global _redis_client
     _redis_client = client
