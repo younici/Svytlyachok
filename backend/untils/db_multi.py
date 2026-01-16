@@ -1,5 +1,5 @@
 import untils.subcription as sub
-import untils.redis_db
+import untils.redis_db as redis_db
 import db.orm.utils as db
 
 async def delete_tg_sub(id: int):
